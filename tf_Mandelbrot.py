@@ -11,6 +11,7 @@ c = tf.constant(Z.astype(np.complex64))
 zs = tf.Variable(c)
 ns = tf.Variable(tf.zeros_like(c,tf.float32))
 
+
 sees = tf.InteractiveSession()
 tf.global_variables_initializer().run()
 
@@ -19,6 +20,7 @@ not_diverged = tf.abs(zs_)<10
 step = tf.group(zs.assign(zs_),ns.assign_add(tf.cast(not_diverged,tf.float32)))
 
 for i in range(125):step.run()
+
 
 plt.imshow(ns.eval())
 plt.show()
